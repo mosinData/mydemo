@@ -4,6 +4,9 @@
 	"parameters": {
 		"factoryName": {
 			"value": "MosinDFForGithub"
+		},
+		"gitnewabs_connectionString": {
+			"value": ""
 		}
 	}
 }

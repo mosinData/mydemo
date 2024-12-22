@@ -6,6 +6,10 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "MosinDFForGithub"
+		},
+		"gitnewabs_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'gitnewabs'"
 		}
 	},
 	"variables": {
@@ -32,6 +36,77 @@
 					"elapsedTimeMetric": {}
 				},
 				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/InputIplData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "gitnewabs",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "IPL_2025_Auction.csv",
+						"folderPath": "In",
+						"container": "mosinfile"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Sr. No.",
+						"type": "String"
+					},
+					{
+						"name": "Player Name",
+						"type": "String"
+					},
+					{
+						"name": "Base Price",
+						"type": "String"
+					},
+					{
+						"name": "Winning Bid",
+						"type": "String"
+					},
+					{
+						"name": "Capped/Uncapped",
+						"type": "String"
+					},
+					{
+						"name": "Team",
+						"type": "String"
+					},
+					{
+						"name": "Sold/Unsold",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/gitnewabs')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/gitnewabs')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('gitnewabs_connectionString')]"
+				}
 			},
 			"dependsOn": []
 		}
