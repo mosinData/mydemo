@@ -1,0 +1,9 @@
+{
+	"name": "MosinDFForGithub",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0ba33204-8390-45c5-aa3c-44bbf9493e58",
+		"tenantId": "5278df43-9b23-421a-ac52-c51670e61179"
+	}
+}
